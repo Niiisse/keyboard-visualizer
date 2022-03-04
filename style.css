@@ -43,6 +43,8 @@ center-margin {
     display: flex;
     justify-content: center; /* Align horizontal */
     align-items: center;     /* Align vertical   */
+
+    transition-duration: 0.07s;
 }
 
 .double {
@@ -82,6 +84,13 @@ center-margin {
 .active-blue {
     background-color: #2B8EDA;
     border-color: #0E2F73;
+
+    color: white;
+}
+
+.active-green {
+    background-color: #31ED31;
+    border-color: #10BC10;
 
     color: white;
 }
