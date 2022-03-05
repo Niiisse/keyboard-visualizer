@@ -1,16 +1,48 @@
-html, body {
+* {
+    --key-base-size: 70px;
+
+    --blue-light: #2b8eda;
+    --blue-dark: #09204f;
+
+    --green-light: #6bda2b;
+    --green-dark: #0c4208;
+
+    --yellow-light: #fce932;
+    --yellow-dark: #786d04;
+
+    --red-light: #eb4034;
+    --red-dark: #550000;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body{
     background-color: #fbf3db;
     font-family: sans-serif;
 }
 
-center-margin {
+.biggo-container {
+    width: min-content;
+    margin: auto;
+}
+
+.center-margin {
     margin: 0 auto;
+    align-items: center;
 }
 
 /* Keyboard Stuff */
 
+.key-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .keyboard-container {
-    margin: 0 auto;
+    /* margin: 0 auto; */
     padding: 20px;
 
     width: max-content;
@@ -27,8 +59,8 @@ center-margin {
 .key {
     margin: 3px;
 
-    width: 50px;
-    height: 50px;
+    width: var(--key-base-size);
+    height: var(--key-base-size);
 
     border: 1px solid #777;
     border-radius: 3px;
@@ -44,53 +76,85 @@ center-margin {
     justify-content: center; /* Align horizontal */
     align-items: center;     /* Align vertical   */
 
+    user-select: none;
+
     transition-duration: 0.07s;
 }
 
 .double {
-    width: 100px;
+    width: calc(var(--key-base-size) * 2);
 }
 
 .third {
-    width: 75px;
+    width: calc(var(--key-base-size) * 1.5);
 }
 
 .small-third {
-    width: 60px;
+    width: calc(var(--key-base-size) * 1.2);
 }
 
 .space {
-    width: 422px;
+    width: calc(var(--key-base-size) * 8.5);
 }
 
 .backslash {
-    width: 65px;
+    width: calc(var(--key-base-size) * 1.3);
 }
 
 .enter {
-    width: 109px;
+    width: calc(var(--key-base-size) * 2.2);
 }
 
 .right-shift {
-    width: 142px;
-}
-
-.key-row {
-    display: flex;
-    flex-direction: row;
+    width: calc(var(--key-base-size) * 2.8);
 }
 
 /* Key States */
-.active-blue {
-    background-color: #2B8EDA;
-    border-color: #0E2F73;
-
+.active {
     color: white;
+    text-shadow: 1px 1px #555;
+}
+
+.active-blue {
+    background-color: var(--blue-light);
+    border-color: var(--blue-dark);
+
 }
 
 .active-green {
-    background-color: #31ED31;
-    border-color: #10BC10;
+    background-color: var(--green-light);
+    border-color: var(--green-dark);
+}
 
-    color: white;
+.active-yellow {
+    background-color: var(--yellow-light);
+    border-color: var(--yellow-dark);
+}
+
+.active-red {
+    background-color: var(--red-light);
+    border-color: var(--red-dark);
+}
+
+.active-test {
+}
+
+.inactive-control {
+    border-color: var(--blue-light);
+    border-width: 3px;
+}
+
+.inactive-shift {
+    border-color: var(--yellow-light);
+    border-width: 3px;
+}
+
+.inactive-alt {
+    border-color: var(--green-light);
+    border-width: 3px;
+}
+
+.inactive-super {
+    border-color: var(--red-light);
+    border-width: 3px;
 }
