@@ -81,6 +81,11 @@ html, body{
     transition-duration: 0.07s;
 }
 
+.key-inactive {
+    background-color: #fefefe;
+    border-color: #777;
+}
+
 .double {
     width: calc(var(--key-base-size) * 2);
 }
@@ -118,7 +123,6 @@ html, body{
 .active-blue {
     background-color: var(--blue-light);
     border-color: var(--blue-dark);
-
 }
 
 .active-green {
