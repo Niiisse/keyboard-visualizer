@@ -8,7 +8,8 @@ import ModifierKeys from "./js/ModifierKeys.js";
 const modifierKeys = new ModifierKeys;
 
 function keyDown(key) {
-    if (key == "Meta") { key = "Super"; }
+    allKeysUp();
+
     console.log(key + " down");
 
     // Enable key
@@ -19,36 +20,27 @@ function keyDown(key) {
         modifierKeys.setModifier(key, true);
     }
 
-    let notSet = false;
     keyboardShortcuts.forEach(shortcut => {
         // Compare shortcut modifierkeys amount to currently pressed modifierkeys
+        let breakMatch = false;
         if (shortcut.modifierKeys.length == modifierKeys.getModifiersAmount()) {
-
             // amounts match - compare keys to currently pressed keys
             shortcut.modifierKeys.forEach(modifierKey => {
                 if (!modifierKeys.isModifierSet(modifierKey)) {
-                    notSet = true;
+                    breakMatch = true;
                 }
             });
 
-            if (!notSet) {
-                // match!!
+            if (!breakMatch) {
+                // match, show shortcut
                 oskInterface.activateButton(shortcut.getKey(), shortcut.getColorData());
-            } else {
-                if (shortcut.getModifiers().includes(key)) {
-                    oskInterface.activateButton(shortcut.getKey(), shortcut.getColorData());
-                }
+                console.info(`Matched, showing key ${shortcut.modifierKeys} + ${shortcut.getKey()}, ${shortcut.getColorData()}`);
             }
         }
-    });
-
-    // Enable shortcuts associated with key
-    keyboardShortcuts.forEach(shortcut => {
     });
 }
 
 function keyUp(key) {
-    if (key == "Meta") { key = "Super"; }
     // console.log(key + " up");
 
     // Keep track of modifier states
@@ -67,6 +59,12 @@ function keyUp(key) {
     });
 }
 
+function allKeysUp() {
+    keyboardShortcuts.forEach(shortcut => {
+        keyUp(shortcut.getKey());
+    });
+}
+
 function isKeyModifier(key) {
     if (key == 'Control' || key == 'Super' || key == 'Alt' || key == 'Shift') {
         return true;
@@ -77,43 +75,41 @@ function isKeyModifier(key) {
 
 // Keyboard Event Listeners
 document.addEventListener('keydown', function(event) {
-    const key = event.key; // "a", "1", "Shift", etc.
+    let key = event.key; // "a", "1", "Shift", etc.
+    if (key == "Meta") { key = "Super"; }
     keyDown(key);
 });
 
 document.addEventListener('keyup', function(event) {
-    const key = event.key; // "a", "1", "Shift", etc.
+    let key = event.key; // "a", "1", "Shift", etc.
+    if (key == "Meta") { key = "Super"; }
     keyUp(key);
 });
 
 
 // Temp array for testing
 keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift"), "o", "default", "Testing"));
-keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift"), "a", "default", "Testing"));
-keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift"), "p", "default", "Testing"));
-keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift"), "n", "default", "Testing"));
-
 keyboardShortcuts.push(new KeyboardShortcut(new Array("Control"), "o", "default", "Testing"));
-keyboardShortcuts.push(new KeyboardShortcut(new Array("Control"), "r", "default", "Testing"));
-keyboardShortcuts.push(new KeyboardShortcut(new Array("Control"), "h", "default", "Testing"));
-keyboardShortcuts.push(new KeyboardShortcut(new Array("Control"), "b", "default", "Testing"));
-
 keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "o", "default", "Testing"));
-keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "b", "default", "Testing"));
-keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "p", "default", "Testing"));
-keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "e", "default", "Testing"));
+keyboardShortcuts.push(new KeyboardShortcut(new Array("Super"), "o", "default", "Testing", "active-red"));
 
+keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Shift"), "o", "default", "Testing"));
 keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Alt"), "o", "default", "Testing"));
-keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Shift"),"o", "default", "Testing"));
+keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Super"), "o", "default", "Testing"));
+keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift", "Alt"), "o", "default", "Testing"));
+keyboardShortcuts.push(new KeyboardShortcut(new Array("Super", "Alt"), "o", "default", "Testing"));
 
-keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift"), "o", "default", "Testing"));
+keyboardShortcuts.push(new KeyboardShortcut(new Array("Super", "Shift"), "o", "default", "Testing"));
+// keyboardShortcuts.push(new KeyboardShortcut(new Array("Super", "Alt"), "u", "default", "Testing"));
+
 keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Super", "Shift"), "o", "default", "Testing"));
+keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Alt", "Shift"), "o", "default", "Testing"));
+keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Alt", "Super"), "o", "default", "Testing"));
 
 // keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "l", "default", "Testing", "active-green"));
 // keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "m", "default", "Testing", "active-green"));
 
 // keyboardShortcuts.push(new KeyboardShortcut(new Array("Super"), "h", "default", "Testing", "active-red"));
-// keyboardShortcuts.push(new KeyboardShortcut(new Array("Super"), "y", "default", "Testing", "active-red"));
 
 // keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift"), "g", "default", "Testing", "active-yellow"));
 // keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift"), "o", "default", "Testing", "active-yellow"));

@@ -16,7 +16,7 @@ export default class ModifierKeys {
     /**
       * Set value of a modifierKey
       * @param {string} key Which modifier key
-      * @param {boolean} value True or false? 
+      * @param {boolean} value True or false?
       */
     setModifier(key, value) {
         switch (key) {

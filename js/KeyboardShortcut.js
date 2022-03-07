@@ -13,12 +13,13 @@ export default class KeyboardShortcut {
      * @param {string} category category name
      * @param {string[]} colorData [0] = background color, [1] = border-color (when active)
      */
-    constructor(modifierKeys, key, mode, category)  {
+    constructor(modifierKeys, key, mode, category) {
         this.modifierKeys = modifierKeys;
         this.key = key;
         this.mode = mode;
         this.category = category;
         this.colorData = this.setColorData(this.modifierKeys);
+
     }
 
     /**
@@ -29,26 +30,26 @@ export default class KeyboardShortcut {
     setColorData(modifierKeys) {
         let colorString = "";
         let borderString = "";
-        console.info(this.modifierKeys.length);
 
         switch (this.modifierKeys.length) {
-        case 0:
-            colorString = "#FFFFFF";
-            break;
-        case 1:
-            colorString = `${this.modifierToColor(modifierKeys[0])[0]}`;
-            borderString = `${this.modifierToColor(modifierKeys[0])[1]}`;
-            break;
-        case 2:
-            colorString = `linear-gradient(135deg, ${this.modifierToColor(modifierKeys[0])[0]} 50%, ${this.modifierToColor(modifierKeys[1])[0]} 51%)`;
-            borderString = colors.defaultBorder; 
-            break;
-        case 3:
-            colorString = `linear-gradient(135deg, ${this.modifierToColor(modifierKeys[0])[0]} 33%, ${this.modifierToColor(modifierKeys[1])[0]} 34%, ${this.modifierToColor[2][0]} 66%)`;
-                borderString = colors.defaultBorder; 
-            break;
-        case 4:
-            break;
+            case 0:
+                colorString = "#FFFFFF";
+                break;
+            case 1:
+                colorString = `${this.modifierToColor(modifierKeys[0])[0]}`;
+                borderString = `${this.modifierToColor(modifierKeys[0])[1]}`;
+                break;
+            case 2:
+                colorString = `linear-gradient(135deg, ${this.modifierToColor(modifierKeys[0])[0]} 50%, ${this.modifierToColor(modifierKeys[1])[0]} 51%)`;
+                borderString = colors.defaultBorder;
+                break;
+            case 3:
+                colorString = `linear-gradient(135deg, ${this.modifierToColor(modifierKeys[0])[0]} 33%, ${this.modifierToColor(modifierKeys[1])[0]} 34%, ${this.modifierToColor(modifierKeys[1])[0]} 65%, ${this.modifierToColor(modifierKeys[2])[0]} 66%)`;
+                borderString = colors.defaultBorder;
+
+                break;
+            case 4:
+                break;
         }
 
         return new Array(colorString, borderString);
@@ -61,16 +62,16 @@ export default class KeyboardShortcut {
       */
     modifierToColor(modifier) {
         switch (modifier) {
-        case "Control":
-            return new Array(colors.blueLight, colors.blueDark);
-        case "Alt":
-            return new Array(colors.greenLight, colors.greenDark);
-        case "Super":
+            case "Control":
+                return new Array(colors.blueLight, colors.blueDark);
+            case "Alt":
+                return new Array(colors.greenLight, colors.greenDark);
+            case "Super":
                 return new Array(colors.redLight, colors.redDark);
-        case "Shift":
-            return new Array(colors.yellowLight, colors.yellowDark);
-        default:
-            return new Array("#ffffff", "#000000");
+            case "Shift":
+                return new Array(colors.yellowLight, colors.yellowDark);
+            default:
+                return new Array("#ffffff", "#000000");
         }
     }
 
