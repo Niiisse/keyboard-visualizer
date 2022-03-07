@@ -1,5 +1,6 @@
 /**
   * Did not feel like dealing with JS' limited array options
+  * Update: array options aren't *as* limited in ECMAscript 6
   * Holds whether modifierkeys are pushed or not
   * TODO: don't write nooby code like this
   * Niisse - 2022/03/06

@@ -19,7 +19,6 @@ export default class KeyboardShortcut {
         this.mode = mode;
         this.category = category;
         this.colorData = this.setColorData(this.modifierKeys);
-
     }
 
     /**
