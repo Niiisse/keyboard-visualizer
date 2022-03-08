@@ -13,3 +13,8 @@ document.addEventListener('keyup', function(event) {
     if (key == "Meta") { key = "Super"; }
     keyboardController.keyUp(key);
 });
+
+/**
+  * TODO: function for converting i3 config file to JSON
+  *
+  */

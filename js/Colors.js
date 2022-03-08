@@ -19,6 +19,8 @@ export default class Colors {
         this.blueLight = "#2b8eda";
         this.blueDark = "#09204f";
 
+        this.defaultBackground= "#fefefe";
         this.defaultBorder = "#777";
+        this.alpha = "#ffffff00";
     }
 }

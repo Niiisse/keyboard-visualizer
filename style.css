@@ -140,8 +140,8 @@ html, body{
     border-color: var(--red-dark);
 }
 
-.active-test {
-}
+.corner-yellow {
+    background: linear-gradient(45deg, #2b8eda 10%, #fefefe00 11%), linear-gradient(135deg, #eb4034 10%, #fefefe00 11%),linear-gradient(225deg, #fce932 10%, #fefefe00 11%),linear-gradient(315deg, #6bda2b 10%, #fefefe00 11%), white;}
 
 .inactive-control {
     border-color: var(--blue-light);

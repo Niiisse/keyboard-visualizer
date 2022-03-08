@@ -20,6 +20,54 @@ export default class KeyboardShortcut {
         this.mode = mode;
         this.category = category;
         this.colorData = this.setColorData(this.modifierKeys);
+        this.cornerStyling = this.setCornerStyling(this.modifierKeys);
+        this.domElement = document.getElementById(this.key);
+        this.applyStyling();
+    }
+
+    applyStyling() {
+        this.domElement.style.background = this.cornerStyling;
+    }
+
+    /**
+      * TODO: code is good start but mustn't be executed from inside object (multiple shortcuts to each key)
+      * TODO: write more detailed descr
+      * Set this shortcut's styling based on modifier keys
+      * @param {string[]} modifierKeys shortcut's associated modifier keys
+      */
+    setCornerStyling(modifierKeys) {
+        let count = 0;
+        let output = "";
+        const size = 10;
+
+        modifierKeys.forEach(modifier => {
+            switch (modifier) {
+                case "Shift":
+                    output += `linear-gradient(225deg, ${colors.yellowLight} ${size}%, ${colors.alpha} ${size + 1}%)`;
+                    break;
+                case "Control":
+                output += `linear-gradient(45deg, ${colors.blueLight} ${size}%, ${colors.alpha} ${size + 1}%)`;
+                    break;
+                case "Super":
+                    output += `linear-gradient(135deg, ${colors.redLight} ${size}%, ${colors.alpha} ${size + 1}%)`;
+                    break;
+                case "Alt":
+                    output += `linear-gradient(315deg, ${colors.greenLight} ${size}%, ${colors.alpha} ${size + 1}%)`;
+                    break;
+                default:
+                    break;
+            }
+            count++;
+
+            if (count != modifierKeys.length) {
+                output += ', ';
+            } else {
+                output += ' ${colors.defaultBackground};';
+            }
+        });
+
+        console.log(output);
+        return output;
     }
 
     /**
@@ -45,12 +93,12 @@ export default class KeyboardShortcut {
                 borderString = colors.defaultBorder;
                 break;
             case 3:
-                colorString = `linear-gradient(${colorAngle}, ${this.modifierToColor(modifierKeys[0])[0]} 33%, ${this.modifierToColor(modifierKeys[1])[0]} 34%, ${this.modifierToColor(modifierKeys[1])[0]} 65%, ${this.modifierToColor(modifierKeys[2])[0]} 66%)`;
+                colorString = `linear-gradient(${colorAngle}, ${this.modifierToColor(modifierKeys[0])[0]} 33%, ${this.modifierToColor(modifierKeys[1])[0]} 34% 65%, ${this.modifierToColor(modifierKeys[2])[0]} 66%)`;
                 borderString = colors.defaultBorder;
                 break;
             case 4:
-                colorString = `linear-gradient(${colorAngle},${this.modifierToColor(modifierKeys[0])[0]} 25%, ${this.modifierToColor(modifierKeys[1])[0]} 26%, ${this.modifierToColor(modifierKeys[1])[0]} 50%, ${this.modifierToColor(modifierKeys[2])[0]} 51%, ${this.modifierToColor(modifierKeys[2])[0]} 75%,${this.modifierToColor(modifierKeys[3])[0]} 76%`;
-            borderString = colors.defaultBorder;
+                colorString = `linear-gradient(${colorAngle},${this.modifierToColor(modifierKeys[0])[0]} 25%, ${this.modifierToColor(modifierKeys[1])[0]} 26% 50%, ${this.modifierToColor(modifierKeys[2])[0]} 51% 75%,${this.modifierToColor(modifierKeys[3])[0]} 76%`;
+                borderString = colors.defaultBorder;
                 break;
         }
 
