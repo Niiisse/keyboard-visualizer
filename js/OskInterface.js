@@ -9,7 +9,7 @@ export default class OskInterface {
 
     /** Apply style changes for activating button on OSK
      * @param {string} keyName Name of pressed key
-     * @param {string} color Classname for applicable color (active-color)
+     * @param {string[]} colorData [0]: highlight color light [1]: highlight color dark
      */
     activateButton(keyName, colorData) {
         try {
