@@ -29,6 +29,7 @@ export default class KeyboardShortcut {
     setColorData(modifierKeys) {
         let colorString = "";
         let borderString = "";
+        const colorAngle = `135deg`;
 
         switch (this.modifierKeys.length) {
             case 0:
@@ -39,15 +40,16 @@ export default class KeyboardShortcut {
                 borderString = `${this.modifierToColor(modifierKeys[0])[1]}`;
                 break;
             case 2:
-                colorString = `linear-gradient(135deg, ${this.modifierToColor(modifierKeys[0])[0]} 50%, ${this.modifierToColor(modifierKeys[1])[0]} 51%)`;
+                colorString = `linear-gradient(${colorAngle}, ${this.modifierToColor(modifierKeys[0])[0]} 50%, ${this.modifierToColor(modifierKeys[1])[0]} 51%)`;
                 borderString = colors.defaultBorder;
                 break;
             case 3:
-                colorString = `linear-gradient(135deg, ${this.modifierToColor(modifierKeys[0])[0]} 33%, ${this.modifierToColor(modifierKeys[1])[0]} 34%, ${this.modifierToColor(modifierKeys[1])[0]} 65%, ${this.modifierToColor(modifierKeys[2])[0]} 66%)`;
+                colorString = `linear-gradient(${colorAngle}, ${this.modifierToColor(modifierKeys[0])[0]} 33%, ${this.modifierToColor(modifierKeys[1])[0]} 34%, ${this.modifierToColor(modifierKeys[1])[0]} 65%, ${this.modifierToColor(modifierKeys[2])[0]} 66%)`;
                 borderString = colors.defaultBorder;
-
                 break;
             case 4:
+                colorString = `linear-gradient(${colorAngle},${this.modifierToColor(modifierKeys[0])[0]} 25%, ${this.modifierToColor(modifierKeys[1])[0]} 26%, ${this.modifierToColor(modifierKeys[1])[0]} 50%, ${this.modifierToColor(modifierKeys[2])[0]} 51%, ${this.modifierToColor(modifierKeys[2])[0]} 75%,${this.modifierToColor(modifierKeys[3])[0]} 76%`;
+            borderString = colors.defaultBorder;
                 break;
         }
 

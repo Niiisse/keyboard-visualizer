@@ -106,6 +106,8 @@ keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Super", "Shift
 keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Alt", "Shift"), "o", "default", "Testing"));
 keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Alt", "Super"), "o", "default", "Testing"));
 
+keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Super", "Shift", "Alt"), "o", "default", "Testing"));
+
 // keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "l", "default", "Testing", "active-green"));
 // keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "m", "default", "Testing", "active-green"));
 
