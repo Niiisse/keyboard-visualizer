@@ -7,6 +7,8 @@ import KeyboardShortcut from "./KeyboardShortcut.js";
   * Handles keyboard events
   * TODO: re-scan pressed mofifiers when a key is let go
   * TODO: methods for adding (or potentially removing) KeyboardShortcuts
+  * Niisse - 2022-03-08
+  * @module KeyboardController
   */
 export default class KeyboardController {
    /**

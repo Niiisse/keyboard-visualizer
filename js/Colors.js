@@ -2,6 +2,7 @@
   * Map of colors as defined in CSS
   * Seemed useful to have for defining key colors programmatically
   * Niisse - 2022/03/06
+  * @module Colors
   */
 
 export default class Colors {

@@ -1,5 +1,6 @@
 import Colors from "./Colors.js";
 const colors = new Colors();
+
 /**
  * Keyboard Shortcut Object
  * @module KeyboardShortcut
@@ -63,14 +64,14 @@ export default class KeyboardShortcut {
       */
     modifierToColor(modifier) {
         switch (modifier) {
-            case "Control":
-                return new Array(colors.blueLight, colors.blueDark);
-            case "Alt":
-                return new Array(colors.greenLight, colors.greenDark);
             case "Super":
                 return new Array(colors.redLight, colors.redDark);
             case "Shift":
                 return new Array(colors.yellowLight, colors.yellowDark);
+            case "Alt":
+                return new Array(colors.greenLight, colors.greenDark);
+            case "Control":
+                return new Array(colors.blueLight, colors.blueDark);
             default:
                 return new Array("#ffffff", "#000000");
         }

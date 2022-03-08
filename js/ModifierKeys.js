@@ -4,8 +4,8 @@
   * Holds whether modifierkeys are pushed or not
   * TODO: don't write nooby code like this
   * Niisse - 2022/03/06
+  * @module ModifierKeys
   */
-
 export default class ModifierKeys {
     constructor() {
         this.control = false;
