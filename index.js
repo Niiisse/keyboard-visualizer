@@ -1,11 +1,5 @@
-import OskInterface from "./js/OskInterface.js";
-var oskInterface = new OskInterface;
-
-import KeyboardShortcut from "./js/KeyboardShortcut.js";
-const keyboardShortcuts = new Array();
-
-import ModifierKeys from "./js/ModifierKeys.js";
-const modifierKeys = new ModifierKeys;
+import KeyboardController from "./js/KeyboardController.js";
+const keyboardController = new KeyboardController();
 
 function keyDown(key) {
     allKeysUp();
@@ -16,7 +10,7 @@ function keyDown(key) {
     oskInterface.activateButton(key, "active");
 
     // Keep track of modifier states
-    if (isKeyModifier) {
+    if (isKeyModifier(key)) {
         modifierKeys.setModifier(key, true);
     }
 
@@ -40,52 +34,18 @@ function keyDown(key) {
     });
 }
 
-function keyUp(key) {
-    // console.log(key + " up");
-
-    // Keep track of modifier states
-    if (isKeyModifier) {
-        modifierKeys.setModifier(key, false);
-    }
-
-    // Disable key
-    oskInterface.deactivateButton(key, "active");
-
-    // Disable any shortcuts associated with the keyUp
-    keyboardShortcuts.forEach(shortcut => {
-        if (shortcut.getModifiers().includes(key)) {
-            oskInterface.deactivateButton(shortcut.getKey());
-        }
-    });
-}
-
-function allKeysUp() {
-    keyboardShortcuts.forEach(shortcut => {
-        keyUp(shortcut.getKey());
-    });
-}
-
-function isKeyModifier(key) {
-    if (key == 'Control' || key == 'Super' || key == 'Alt' || key == 'Shift') {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 // Keyboard Event Listeners
 document.addEventListener('keydown', function(event) {
     let key = event.key; // "a", "1", "Shift", etc.
     if (key == "Meta") { key = "Super"; }
-    keyDown(key);
+    keyboardController.keyDown(key);
 });
 
 document.addEventListener('keyup', function(event) {
     let key = event.key; // "a", "1", "Shift", etc.
     if (key == "Meta") { key = "Super"; }
-    keyUp(key);
+    keyboardController.keyUp(key);
 });
-
 
 // Temp array for testing
 keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift"), "o", "default", "Testing"));
