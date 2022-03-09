@@ -5,76 +5,75 @@
  * @module OskInterface
  */
 
+import KeyboardShortcut from "./KeyboardShortcut.js";
+
 export default class OskInterface {
 
     /** Apply style changes for activating button on OSK
-     * @param {string} keyName Name of pressed key
+     * @param {KeyboardShortcut} KeyboardShortcut keyboardShortcut object reference
      * @param {string[]} colorData [0]: highlight color light [1]: highlight color dark
      */
-    activateButton(keyName, colorData) {
+    activateButton(keyObject) {
         try {
-            let key = document.getElementById(keyName);
-
-            switch (keyName) {
+            switch (keyObject.key) {
                 case "Alt":
-                    key.classList.add("active", "active-green");
-                    key.classList.remove("inactive-alt");
+                    keyObject.domElement.classList.add("active", "active-green");
+                    keyObject.domElement.classList.remove("inactive-alt");
                     break;
                 case "Control":
-                    key.classList.add("active", "active-blue");
-                    key.classList.remove("inactive-control");
+                    keyObject.domElement.classList.add("active", "active-blue");
+                    keyObject.domElement.classList.remove("inactive-control");
                     break;
                 case "Shift":
-                    key.classList.add("active", "active-yellow");
-                    key.classList.remove("inactive-shift");
+                    keyObject.domElement.classList.add("active", "active-yellow");
+                    keyObject.domElement.classList.remove("inactive-shift");
                     break;
                 case "Super":
-                    key.classList.add("active", "active-red");
-                    key.classList.remove("inactive-super");
+                    keyObject.domElement.classList.add("active", "active-red");
+                    keyObject.domElement.classList.remove("inactive-super");
                     break;
                 default:
-                    key.classList.remove("key-inactive");
-                    key.classList.add("active");
+                    keyObject.domElement.classList.remove("key-inactive");
+                    keyObject.domElement.classList.add("active");
 
-                    key.style.background = `${colorData[0]}`;
-                    key.style.borderColor = `${colorData[1]}`;
+                    keyObject.domElement.style.background = `${keyObject.colorData[0]}`;
+                    keyObject.domElement.style.borderColor = `${keyObject.colorData[1]}`;
                     break;
             }
         } catch (error) {
-            console.warn("Couldn't activate key '" + keyName + "'");
+            console.warn("Couldn't activate key '" + keyObject.key + "'");
         }
     }
 
     /** Apply style changes for deactivating button on OSK
-     * @param {string} keyName Name of pressed key
+     * @param {KeyboardShortcut} keyObject KeyboardShortcut object reference
      * @param {string} color Classname for applicable color (active-color)
      */
-    deactivateButton(keyName) {
+    deactivateButton(keyObject) {
         try {
-            let key = document.getElementById(keyName);
-
-            switch (keyName) {
+            switch (keyObject.key) {
                 case "Alt":
-                    key.classList.remove("active", "active-green");
-                    key.classList.add("inactive-alt");
+                    keyObject.domElement.classList.remove("active", "active-green");
+                    keyObject.domElement.classList.add("inactive-alt");
                     break;
                 case "Control":
-                    key.classList.remove("active", "active-blue");
-                    key.classList.add("inactive-control");
+                    keyObject.domElement.classList.remove("active", "active-blue");
+                    keyObject.domElement.classList.add("inactive-control");
                     break;
                 case "Shift":
-                    key.classList.remove("active", "active-yellow");
-                    key.classList.add("inactive-shift");
+                    keyObject.domElement.classList.remove("active", "active-yellow");
+                    keyObject.domElement.classList.add("inactive-shift");
                     break;
                 case "Super":
-                    key.classList.remove("active", "active-red");
-                    key.classList.add("inactive-super");
+                    keyObject.domElement.classList.remove("active", "active-red");
+                    keyObject.domElement.classList.add("inactive-super");
                     break;
                 default:
-                    key.classList.remove("active");
-                    key.classList.add("key-inactive");
-                    key.style.removeProperty("background");
-                    key.style.removeProperty("border-color");
+                    keyObject.domElement.classList.remove("active");
+                    keyObject.domElement.classList.add("key-inactive");
+
+                    keyObject.domElement.style.removeProperty("background");
+                    keyObject.domElement.style.removeProperty("border-color");
                     break;
             }
         } catch {

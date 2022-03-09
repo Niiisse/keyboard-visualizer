@@ -22,7 +22,9 @@ export default class KeyboardShortcut {
         this.colorData = this.setColorData(this.modifierKeys);
         this.cornerStyling = this.setCornerStyling(this.modifierKeys);
         this.domElement = document.getElementById(this.key);
+        console.log(this.domElement);
         this.applyStyling();
+        this.domElement.style.background = this.setCornerStyling(this.modifierKeys);
     }
 
     applyStyling() {
@@ -31,6 +33,7 @@ export default class KeyboardShortcut {
 
     /**
       * TODO: code is good start but mustn't be executed from inside object (multiple shortcuts to each key)
+      * or is it? ^
       * TODO: write more detailed descr
       * Set this shortcut's styling based on modifier keys
       * @param {string[]} modifierKeys shortcut's associated modifier keys
@@ -62,7 +65,7 @@ export default class KeyboardShortcut {
             if (count != modifierKeys.length) {
                 output += ', ';
             } else {
-                output += ' ${colors.defaultBackground};';
+                output += `, ${colors.defaultBackground};`;
             }
         });
 

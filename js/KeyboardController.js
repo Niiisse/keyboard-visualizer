@@ -28,15 +28,15 @@ export default class KeyboardController {
       * match the currently pressed modifier keys
       * If all match, activate up key on OskInterface
       *
-      * @param {string} key the currently pressed key
+      * @param {KeyboardShortcut} keyObject the currently pressed key
       */
-    keyDown(key) {
+    keyDown(keyObject) {
         this.allKeysUp();
 
-        this.oskInterface.activateButton(key, "active");
+        // this.oskInterface.activateButton(key, "active");
 
-        if (this.isKeyModifier(key)) {
-            this.modifierKeys.setModifier(key, true);
+        if (this.isKeyModifier(keyObject.key)) {
+            this.modifierKeys.setModifier(keyObject.key, true);
         }
 
         this.keyboardShortcuts.forEach(shortcut => {
@@ -51,7 +51,7 @@ export default class KeyboardController {
 
             if (!breakMatch) {
                 // Match! Show shortcut
-                this.oskInterface.activateButton(shortcut.getKey(), shortcut.getColorData());
+                this.oskInterface.activateButton(shortcut);
                 console.info(`Matched, showing key ${shortcut.modifierKeys} + ${shortcut.getKey()}, ${shortcut.getColorData()}`);
             }
         });
@@ -63,19 +63,18 @@ export default class KeyboardController {
       * active class from relevant keys as well
       * Removes pressed key's active state, just in case
       *
-      * @param {string} key the currently pressed key
+      * @param {string} key - the currently pressed key
       */
-    keyUp(key) {
-        if (this.isKeyModifier(key)) {
-            this.modifierKeys.setModifier(key, false);
+    keyUp(keyObject) {
+        if (this.isKeyModifier(keyObject.key)) {
+            this.modifierKeys.setModifier(keyObject.key, false);
             this.keyboardShortcuts.forEach(shortcut => {
-                if (shortcut.getModifiers().includes(key)) {
-                    this.oskInterface.deactivateButton(shortcut.getKey());
+                if (shortcut.getModifiers().includes(keyObject.key)) {
+                    this.oskInterface.deactivateButton(shortcut);
                 }
             });
         }
-
-        this.oskInterface.deactivateButton(key, "active");
+        this.oskInterface.deactivateButton(keyObject);
     }
 
     /**
@@ -84,14 +83,14 @@ export default class KeyboardController {
       */
     allKeysUp() {
         this.keyboardShortcuts.forEach(shortcut => {
-            this.keyUp(shortcut.getKey());
+            this.keyUp(shortcut);
         });
     }
 
     /**
       * Checks whether key is a modifier
       *
-      * @param {string} key Pressed key
+      * @param {KeyboardShortcut} keyObject the currently pressed key
       * @returns {bool} true or false
       */
     isKeyModifier(key) {
@@ -123,6 +122,7 @@ export default class KeyboardController {
         this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Alt", "Super"), "o", "default", "Testing"));
 
         this.keyboardShortcuts.push(new KeyboardShortcut(["Control", "Super", "Shift", "Alt"], "o", "default", "Testing"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Control", "Alt"], "i", "default", "Testing"));
 
     }
 }
