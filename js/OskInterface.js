@@ -75,7 +75,6 @@ export default class OskInterface {
                     key.classList.add("key-inactive");
                     key.style.removeProperty("background");
                     key.style.removeProperty("border-color");
-
                     break;
             }
         } catch {

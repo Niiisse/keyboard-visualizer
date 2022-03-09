@@ -104,7 +104,7 @@ export default class KeyboardController {
 
     generateTestArray() {
         // Temp array for testing
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift"), "o", "default", "Testing"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Shift"], "o", "default", "Testing"));
         this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control"), "o", "default", "Testing"));
         this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "o", "default", "Testing"));
         this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Super"), "o", "default", "Testing", "active-red"));
@@ -122,14 +122,7 @@ export default class KeyboardController {
         this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Alt", "Shift"), "o", "default", "Testing"));
         this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Alt", "Super"), "o", "default", "Testing"));
 
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Super", "Shift", "Alt"), "o", "default", "Testing"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Control", "Super", "Shift", "Alt"], "o", "default", "Testing"));
 
-        // this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "l", "default", "Testing", "active-green"));
-        // this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "m", "default", "Testing", "active-green"));
-
-        // this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Super"), "h", "default", "Testing", "active-red"));
-
-        // this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift"), "g", "default", "Testing", "active-yellow"));
-        // this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift"), "o", "default", "Testing", "active-yellow"));
     }
 }
