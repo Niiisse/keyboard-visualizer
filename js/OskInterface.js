@@ -2,6 +2,7 @@
  * On-screen Keyboard Interface
  * Handles interfacing app logic with keyboard
  * Niisse - 2022/03/05
+ * TODO: List all keys bound to a specific key if pressed (call from kbdController with string data)
  * @module OskInterface
  */
 

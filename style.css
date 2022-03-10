@@ -1,6 +1,9 @@
 * {
     --key-base-size: 70px;
 
+    --corner-size: 10%;
+    --corner-after: 11%;
+
     --blue-light: #2b8eda;
     --blue-dark: #09204f;
 
@@ -12,6 +15,8 @@
 
     --red-light: #eb4034;
     --red-dark: #550000;
+
+    --key-background: #fefefe;
 }
 
 * {
@@ -154,8 +159,9 @@ html, body{
     border-color: var(--red-dark);
 }
 
-.corner-yellow {
-    background: linear-gradient(45deg, #2b8eda 10%, #fefefe00 11%), linear-gradient(135deg, #eb4034 10%, #fefefe00 11%),linear-gradient(225deg, #fce932 10%, #fefefe00 11%),linear-gradient(315deg, #6bda2b 10%, #fefefe00 11%), white;}
+.key-background {
+    background: var(--key-background);
+}
 
 .inactive-control {
     border-color: var(--blue-light);

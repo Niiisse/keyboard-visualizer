@@ -13,20 +13,27 @@ import KeyboardShortcut from "./KeyboardShortcut.js";
 export default class KeyboardController {
     /**
       * @constructor
-      * Sets up necessary classes
+      * Sets up necessary classes.
+      * keys{} holds keyboardShortcuts sorted per key
       */
     constructor() {
         this.modifierKeys = new ModifierKeys();
         this.oskInterface = new OskInterface();
         this.keyboardShortcuts = new Array();
+        this.keys = {};
+
         this.generateTestArray();
+        console.table(this.keys);
     }
     /**
       * Handles key down logic
       * Set active class for pressed button
-      * For each keyboardShortcut, see if the associated keys
-      * match the currently pressed modifier keys
-      * If all match, activate up key on OskInterface
+      * Is key a modifier?
+      * - For each keyboardShortcut, see if the associated keys
+      * - match the currently pressed modifier keys
+      * - If all match, activate up key on OskInterface
+      * Else
+      * - Get all KeyboardShortcuts associated with pressed key and show them in list
       *
       * @param {string} key the currently pressed key
       */
@@ -39,30 +46,38 @@ export default class KeyboardController {
 
         if (this.isKeyModifier(key)) {
             this.modifierKeys.setModifier(key, true);
+
+            this.keyboardShortcuts.forEach(shortcut => {
+                // Compare shortcut modifierkeys amoutn to currently pressed modifierkeys
+                if (shortcut.modifierKeys.length == this.modifierKeys.getModifiersAmount()) {
+                    // Amounts match -- compare keys to currently pressed keys
+                    let breakMatch = false;
+                    shortcut.modifierKeys.forEach(modifierKey => {
+                        if (!this.modifierKeys.isModifierSet(modifierKey)) {
+                            breakMatch = true;
+                        }
+                    });
+
+                    if (!breakMatch) {
+                        // Match! Show shortcut
+                        this.oskInterface.activateButton(shortcut.getKey(), shortcut.getColorData());
+                        // console.info(`Matched, showing key ${shortcut.modifierKeys} + ${shortcut.getKey()}, ${shortcut.getColorData()}`);
+
+                        // TODO: move to proper place, hacky naming list
+                        nameList += `${shortcut.modifierKeys} + ${shortcut.getKey()}: ${shortcut.name} <br> `;
+                    }
+                }
+            });
+        } else {
+            // Key isn't a modifier
+            if (key in this.keys) {
+                this.keys[key].forEach(shortcut => {
+                    nameList += `${shortcut.modifierKeys} + ${shortcut.getKey()}: ${shortcut.name} <br> `;
+                });
+            }
         }
 
-        this.keyboardShortcuts.forEach(shortcut => {
-            // Compare shortcut modifierkeys amoutn to currently pressed modifierkeys
-            if (shortcut.modifierKeys.length == this.modifierKeys.getModifiersAmount()) {
-                // Amounts match -- compare keys to currently pressed keys
-                let breakMatch = false;
-                shortcut.modifierKeys.forEach(modifierKey => {
-                    if (!this.modifierKeys.isModifierSet(modifierKey)) {
-                        breakMatch = true;
-                    }
-                });
-
-                if (!breakMatch) {
-                    // Match! Show shortcut
-                    this.oskInterface.activateButton(shortcut.getKey(), shortcut.getColorData());
-                    // console.info(`Matched, showing key ${shortcut.modifierKeys} + ${shortcut.getKey()}, ${shortcut.getColorData()}`);
-
-                    // TODO: move to proper place, hacky naming list
-                    nameList += `${shortcut.modifierKeys} + ${shortcut.getKey()}: ${shortcut.name} <br> `;
-                }
-            }
-        });
-        // console.log(nameList);
+        // TODO: fix this hacky stuff; create function in OskInterface
         document.getElementById("shortcuts-name-list").innerHTML = nameList;
     }
     /**
@@ -88,6 +103,15 @@ export default class KeyboardController {
         document.getElementById("shortcuts-name-list").innerHTML = "";
     }
 
+    // TODO: jsdoc
+    addShortcutToKeys(shortcut) {
+        if (shortcut.key in this.keys) {
+            this.keys[shortcut.key].push(shortcut);
+        } else {
+            this.keys[shortcut.key] = [shortcut];
+        }
+    }
+
     /**
       * Disables each key. Used to make sure there's no ghost keys remaning when
       * pressing additional modifiers
@@ -111,6 +135,10 @@ export default class KeyboardController {
             return false;
         }
     }
+
+    /**
+      * Generate temp test array of keyboard shortcuts
+      */
     generateTestArray() {
         // Temp array for testing
 
@@ -168,13 +196,17 @@ export default class KeyboardController {
 
         this.keyboardShortcuts.push(new KeyboardShortcut(["Control", "Alt"], "t", "default", "Layout: tabbed"));
 
-        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "h", "default", "Move Window Left")) ;
-        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "j", "default", "Move Window Down")) ;
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "h", "default", "Move Window Left"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "j", "default", "Move Window Down"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "k", "default", "Move Window Up"));
-        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "l", "default", "Move Window Right") );
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "l", "default", "Move Window Right"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "ArrowLeft", "default", "Move Window Left"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "ArrowDown", "default", "Move Window Down"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "ArrowUp", "default", "Move Window Up"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "ArrowRight", "default", "Move Window Right"));
+
+        this.keyboardShortcuts.forEach(shortcut => {
+            this.addShortcutToKeys(shortcut);
+        });
     }
 }

@@ -20,10 +20,12 @@ export default class KeyboardShortcut {
         this.mode = mode;
         this.name = name ;
         this.colorData = this.setColorData(this.modifierKeys);
+
         // this.cornerStyling = this.setCornerStyling(this.modifierKeys);
         // this.domElement = document.getElementById(this.key);
         // this.applyStyling();
     }
+
 
     // applyStyling() {
     //     this.domElement.style.background = this.cornerStyling;
@@ -139,14 +141,6 @@ export default class KeyboardShortcut {
      */
     getKey() {
         return this.key;
-    }
-
-    /**
-     * Get color
-      * @returns {string} color
-      */
-    getColor() {
-        return this.color;
     }
 
     /**
