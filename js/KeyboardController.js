@@ -11,10 +11,10 @@ import KeyboardShortcut from "./KeyboardShortcut.js";
   * @module KeyboardController
   */
 export default class KeyboardController {
-   /**
-     * @constructor
-     * Sets up necessary classes
-     */
+    /**
+      * @constructor
+      * Sets up necessary classes
+      */
     constructor() {
         this.modifierKeys = new ModifierKeys();
         this.oskInterface = new OskInterface();
@@ -31,6 +31,8 @@ export default class KeyboardController {
       * @param {string} key the currently pressed key
       */
     keyDown(key) {
+        let nameList = "";
+
         this.allKeysUp();
 
         this.oskInterface.activateButton(key, ["#eee", "#333"]);
@@ -41,20 +43,27 @@ export default class KeyboardController {
 
         this.keyboardShortcuts.forEach(shortcut => {
             // Compare shortcut modifierkeys amoutn to currently pressed modifierkeys
-            let breakMatch = false;
-            // Amounts match -- compare keys to currently pressed keys
-            shortcut.modifierKeys.forEach(modifierKey => {
-                if (!this.modifierKeys.isModifierSet(modifierKey)) {
-                    breakMatch = true;
-                }
-            });
+            if (shortcut.modifierKeys.length == this.modifierKeys.getModifiersAmount()) {
+                // Amounts match -- compare keys to currently pressed keys
+                let breakMatch = false;
+                shortcut.modifierKeys.forEach(modifierKey => {
+                    if (!this.modifierKeys.isModifierSet(modifierKey)) {
+                        breakMatch = true;
+                    }
+                });
 
-            if (!breakMatch) {
-                // Match! Show shortcut
-                this.oskInterface.activateButton(shortcut.getKey(), shortcut.getColorData());
-                console.info(`Matched, showing key ${shortcut.modifierKeys} + ${shortcut.getKey()}, ${shortcut.getColorData()}`);
+                if (!breakMatch) {
+                    // Match! Show shortcut
+                    this.oskInterface.activateButton(shortcut.getKey(), shortcut.getColorData());
+                    // console.info(`Matched, showing key ${shortcut.modifierKeys} + ${shortcut.getKey()}, ${shortcut.getColorData()}`);
+
+                    // TODO: move to proper place, hacky naming list
+                    nameList += `${shortcut.modifierKeys} + ${shortcut.getKey()}: ${shortcut.name} <br> `;
+                }
             }
         });
+        // console.log(nameList);
+        document.getElementById("shortcuts-name-list").innerHTML = nameList;
     }
     /**
       * Handles key up event
@@ -112,6 +121,7 @@ export default class KeyboardController {
         // super
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "q", "default", "Close window"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "Enter", "default", "Launch terminal"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "r", "default", "Mode: Resize"));
 
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "h", "default", "Focus left"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "j", "default", "Focus down"));
