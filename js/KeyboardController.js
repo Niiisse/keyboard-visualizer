@@ -33,7 +33,7 @@ export default class KeyboardController {
     keyDown(key) {
         this.allKeysUp();
 
-        this.oskInterface.activateButton(key, "active");
+        this.oskInterface.activateButton(key, ["#eee", "#333"]);
 
         if (this.isKeyModifier(key)) {
             this.modifierKeys.setModifier(key, true);
@@ -101,7 +101,6 @@ export default class KeyboardController {
             return false;
         }
     }
-
     generateTestArray() {
         // Temp array for testing
         this.keyboardShortcuts.push(new KeyboardShortcut(["Shift"], "o", "default", "Testing"));
