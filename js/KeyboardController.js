@@ -85,6 +85,7 @@ export default class KeyboardController {
         }
 
         this.oskInterface.deactivateButton(key, "active");
+        document.getElementById("shortcuts-name-list").innerHTML = "";
     }
 
     /**

@@ -98,6 +98,16 @@ html, body{
     width: calc(var(--key-base-size) * 1.2);
 }
 
+.half-height-container {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.half-height {
+    height: calc(var(--key-base-size) * 0.45);
+}
+
 .space {
     width: calc(var(--key-base-size) * 8.5);
 }
@@ -112,6 +122,10 @@ html, body{
 
 .right-shift {
     width: calc(var(--key-base-size) * 2.8);
+}
+
+.down-arrow {
+    font-stretch: semi-condensed;
 }
 
 /* Key States */
