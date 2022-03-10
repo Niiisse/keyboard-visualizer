@@ -176,3 +176,7 @@ html, body{
     border-color: var(--red-light);
     border-width: 3px;
 }
+
+#shortcuts-name-list {
+    font-family: monospace;
+}
