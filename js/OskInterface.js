@@ -46,7 +46,8 @@ export default class OskInterface {
         }
     }
 
-    /** Apply style changes for deactivating button on OSK
+    /**
+     * Apply style changes for deactivating button on OSK
      * @param {string} keyName Name of pressed key
      * @param {string} color Classname for applicable color (active-color)
      */
@@ -81,5 +82,13 @@ export default class OskInterface {
         } catch {
             console.warn("Couldn't deactivate key, either");
         }
+    }
+
+    /**
+      * Set inner HTML of shortcuts name list
+      */
+    setShortcutNameList(html) {
+        let domElement = document.getElementById("shortcuts-name-list");
+        domElement.innerHTML = html;
     }
 }

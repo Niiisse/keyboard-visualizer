@@ -26,7 +26,20 @@ export default class KeyboardController {
         console.table(this.keys);
     }
     /**
-      * Handles key down logic
+      * Receives pressed key
+      *
+      * @param {string} key the currently pressed key
+      */
+    keyDown(key) {
+
+        this.allKeysUp();
+
+        this.oskInterface.activateButton(key, ["#eee", "#333"]);
+        this.activateRelatedShortcuts(key);
+    }
+
+    /**
+      * Actually handles key down logic
       * Set active class for pressed button
       * Is key a modifier?
       * - For each keyboardShortcut, see if the associated keys
@@ -37,13 +50,8 @@ export default class KeyboardController {
       *
       * @param {string} key the currently pressed key
       */
-    keyDown(key) {
+    activateRelatedShortcuts(key) {
         let nameList = "";
-
-        this.allKeysUp();
-
-        this.oskInterface.activateButton(key, ["#eee", "#333"]);
-
         if (this.isKeyModifier(key)) {
             this.modifierKeys.setModifier(key, true);
 
@@ -59,9 +67,7 @@ export default class KeyboardController {
                     });
 
                     if (!breakMatch) {
-                        // Match! Show shortcut
                         this.oskInterface.activateButton(shortcut.getKey(), shortcut.getColorData());
-                        // console.info(`Matched, showing key ${shortcut.modifierKeys} + ${shortcut.getKey()}, ${shortcut.getColorData()}`);
 
                         // TODO: move to proper place, hacky naming list
                         nameList += `${shortcut.modifierKeys} + ${shortcut.getKey()}: ${shortcut.name} <br> `;
@@ -77,9 +83,9 @@ export default class KeyboardController {
             }
         }
 
-        // TODO: fix this hacky stuff; create function in OskInterface
-        document.getElementById("shortcuts-name-list").innerHTML = nameList;
+        this.oskInterface.setShortcutNameList(nameList);
     }
+
     /**
       * Handles key up event
       * Keeps track of modifier state, if relevant
@@ -100,10 +106,14 @@ export default class KeyboardController {
         }
 
         this.oskInterface.deactivateButton(key, "active");
-        document.getElementById("shortcuts-name-list").innerHTML = "";
+        this.oskInterface.setShortcutNameList(nameList);
     }
 
-    // TODO: jsdoc
+    /**
+      * Add KeyboardShortcut to keys{}
+      *
+      * @param {KeyboardShortcut} shortcut - KeyboardShortcut to be added
+      */
     addShortcutToKeys(shortcut) {
         if (shortcut.key in this.keys) {
             this.keys[shortcut.key].push(shortcut);
@@ -205,6 +215,7 @@ export default class KeyboardController {
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "ArrowUp", "default", "Move Window Up"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "ArrowRight", "default", "Move Window Right"));
 
+        // Add every shortcut to keymap
         this.keyboardShortcuts.forEach(shortcut => {
             this.addShortcutToKeys(shortcut);
         });
