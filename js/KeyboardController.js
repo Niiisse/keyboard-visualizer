@@ -129,6 +129,11 @@ export default class KeyboardController {
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "k", "default", "Focus up"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "l", "default", "Focus right"));
 
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "ArrowLeft", "default", "Focus left"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "ArrowDown", "default", "Focus down"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "ArrowUp", "default", "Focus up"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "ArrowRight", "default", "Focus right"));
+
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "b", "default", "Split h"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "v", "default", "Split v"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "m", "default", "Toggle fullscreen"));
@@ -161,7 +166,15 @@ export default class KeyboardController {
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "9", "default", "Move Window to Workspace 9"));
         this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "0", "default", "Move Window to Workspace 0"));
 
-
         this.keyboardShortcuts.push(new KeyboardShortcut(["Control", "Alt"], "t", "default", "Layout: tabbed"));
+
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "h", "default", "Move Window Left")) ;
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "j", "default", "Move Window Down")) ;
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "k", "default", "Move Window Up"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "l", "default", "Move Window Right") );
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "ArrowLeft", "default", "Move Window Left"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "ArrowDown", "default", "Move Window Down"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "ArrowUp", "default", "Move Window Up"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "ArrowRight", "default", "Move Window Right"));
     }
 }
