@@ -9,16 +9,16 @@ export default class KeyboardShortcut {
     /**
      * Keyboard Shortcut object
      * @param  {string[]} modifierKeys stringArray of relevant modifier keys
-     * @param {string} key key name
-     * @param {string} mode mode name
-     * @param {string} category category name
-     * @param {string[]} colorData [0] = background color, [1] = border-color (when active)
+     * @param {string} key - key name
+     * @param {string} mode - mode name
+     * @param {string} name - shortcut name
+     * @param {string[]} colorData - [0] = background color, [1] = border-color (when active)
      */
-    constructor(modifierKeys, key, mode, category) {
+    constructor(modifierKeys, key, mode, name) {
         this.modifierKeys = modifierKeys;
         this.key = key;
         this.mode = mode;
-        this.category = category;
+        this.name = name ;
         this.colorData = this.setColorData(this.modifierKeys);
         this.cornerStyling = this.setCornerStyling(this.modifierKeys);
         this.domElement = document.getElementById(this.key);

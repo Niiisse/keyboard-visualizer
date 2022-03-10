@@ -103,25 +103,54 @@ export default class KeyboardController {
     }
     generateTestArray() {
         // Temp array for testing
-        this.keyboardShortcuts.push(new KeyboardShortcut(["Shift"], "o", "default", "Testing"));
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control"), "o", "default", "Testing"));
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Alt"), "o", "default", "Testing"));
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Super"), "o", "default", "Testing", "active-red"));
 
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Shift"), "o", "default", "Testing"));
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Alt"), "o", "default", "Testing"));
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Super"), "o", "default", "Testing"));
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Shift", "Alt"), "o", "default", "Testing"));
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Super", "Alt"), "o", "default", "Testing"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Control"], "q", "default", "Close window"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Alt"], "q", "default", "Close window"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Alt"], "a", "default", "Close window"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Control", "Alt"], "q", "default", "Close window"));
 
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Super", "Shift"), "o", "default", "Testing"));
-        // this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Super", "Alt"), "u", "default", "Testing"));
+        // super
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "q", "default", "Close window"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "Enter", "default", "Launch terminal"));
 
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Super", "Shift"), "o", "default", "Testing"));
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Alt", "Shift"), "o", "default", "Testing"));
-        this.keyboardShortcuts.push(new KeyboardShortcut(new Array("Control", "Alt", "Super"), "o", "default", "Testing"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "h", "default", "Focus left"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "j", "default", "Focus down"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "k", "default", "Focus up"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "l", "default", "Focus right"));
 
-        this.keyboardShortcuts.push(new KeyboardShortcut(["Control", "Super", "Shift", "Alt"], "o", "default", "Testing"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "b", "default", "Split h"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "v", "default", "Split v"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "m", "default", "Toggle fullscreen"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "s", "default", "Layout: stacked"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "w", "default", "Layout: tabbed"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "e", "default", "Layout: toggle split"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], " ", "default", "Focus mode_toggle"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "a", "default", "Focus parent"));
 
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "1", "default", "Switch To Workspace 1"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "2", "default", "Switch To Workspace 2"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "3", "default", "Switch To Workspace 3"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "4", "default", "Switch To Workspace 4"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "5", "default", "Switch To Workspace 5"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "6", "default", "Switch To Workspace 6"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "7", "default", "Switch To Workspace 7"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "8", "default", "Switch To Workspace 8"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "9", "default", "Switch To Workspace 9"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super"], "0", "default", "Switch To Workspace 0"));
+
+        // super + shift
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "1", "default", "Move Window to Workspace 1"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "2", "default", "Move Window to Workspace 2"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "3", "default", "Move Window to Workspace 3"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "4", "default", "Move Window to Workspace 4"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "5", "default", "Move Window to Workspace 5"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "6", "default", "Move Window to Workspace 6"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "7", "default", "Move Window to Workspace 7"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "8", "default", "Move Window to Workspace 8"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "9", "default", "Move Window to Workspace 9"));
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Super", "Shift"], "0", "default", "Move Window to Workspace 0"));
+
+
+        this.keyboardShortcuts.push(new KeyboardShortcut(["Control", "Alt"], "t", "default", "Layout: tabbed"));
     }
 }
