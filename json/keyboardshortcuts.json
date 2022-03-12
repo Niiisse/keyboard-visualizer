@@ -1,0 +1,23 @@
+{
+    "KeyboardShortcut": {
+        "modifierKeys": [
+            "Super",
+            "Control"
+        ],
+
+        "key": "t",
+        "mode": "default",
+        "name": "JSON parse test"
+    },
+
+    "KeyboardShortcut": {
+        "modifierKeys": [
+            "Alt",
+            "Control"
+        ],
+
+        "key": "l",
+        "mode": "default",
+        "name": "LSON larse test"
+    }
+}

@@ -1,6 +1,7 @@
 import ModifierKeys from "./ModifierKeys.js";
 import OskInterface from "./OskInterface.js";
 import KeyboardShortcut from "./KeyboardShortcut.js";
+import Parser from "./Parser.js";
 
 /**
   * Keyboard Controller
@@ -22,6 +23,10 @@ export default class KeyboardController {
         this.keyboardShortcuts = new Array();
         this.keys = {};
 
+
+        this.parser = new Parser();
+        console.table(this.parser.loadJSON());
+
         this.generateTestArray();
         console.table(this.keys);
     }
@@ -31,7 +36,6 @@ export default class KeyboardController {
       * @param {string} key the currently pressed key
       */
     keyDown(key) {
-
         this.allKeysUp();
 
         this.oskInterface.activateButton(key, ["#eee", "#333"]);
@@ -67,10 +71,10 @@ export default class KeyboardController {
                     });
 
                     if (!breakMatch) {
-                        this.oskInterface.activateButton(shortcut.getKey(), shortcut.getColorData());
+                        this.oskInterface.activateButton(shortcut.key, shortcut.modifierKeys);
 
                         // TODO: move to proper place, hacky naming list
-                        nameList += `${shortcut.modifierKeys} + ${shortcut.getKey()}: ${shortcut.name} <br> `;
+                        nameList += `${shortcut.modifierKeys} + ${shortcut.key}: ${shortcut.name} <br> `;
                     }
                 }
             });
@@ -78,7 +82,7 @@ export default class KeyboardController {
             // Key isn't a modifier
             if (key in this.keys) {
                 this.keys[key].forEach(shortcut => {
-                    nameList += `${shortcut.modifierKeys} + ${shortcut.getKey()}: ${shortcut.name} <br> `;
+                    nameList += `${shortcut.modifierKeys} + ${shortcut.key}: ${shortcut.name} <br> `;
                 });
             }
         }
@@ -99,14 +103,14 @@ export default class KeyboardController {
         if (this.isKeyModifier(key)) {
             this.modifierKeys.setModifier(key, false);
             this.keyboardShortcuts.forEach(shortcut => {
-                if (shortcut.getModifiers().includes(key)) {
-                    this.oskInterface.deactivateButton(shortcut.getKey());
+                if (shortcut.modifierKeys.includes(key)) {
+                    this.oskInterface.deactivateButton(shortcut.key);
                 }
             });
         }
 
         this.oskInterface.deactivateButton(key, "active");
-        this.oskInterface.setShortcutNameList(nameList);
+        this.oskInterface.setShortcutNameList('');
     }
 
     /**
@@ -128,7 +132,7 @@ export default class KeyboardController {
       */
     allKeysUp() {
         this.keyboardShortcuts.forEach(shortcut => {
-            this.keyUp(shortcut.getKey());
+            this.keyUp(shortcut.key);
         });
     }
 

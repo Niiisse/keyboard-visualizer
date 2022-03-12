@@ -3,7 +3,8 @@
   * Update: array options aren't *as* limited in ECMAscript 6
   * Holds whether modifierkeys are pushed or not
   * TODO: don't write nooby code like this
-  * TODO: ^ FIX BY USING ASSOCIATIVE ARRAY!
+  * TODO: ^ Fix by using associative array?
+  *
   * Niisse - 2022/03/06
   * @module ModifierKeys
   */
